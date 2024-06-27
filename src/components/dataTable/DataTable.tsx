@@ -2,7 +2,6 @@ import {
   DataGrid,
   GridColDef,
   GridToolbar,
-  GridRowParams,
 } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
@@ -27,9 +26,8 @@ const DataTable = (props: Props) => {
     },
   });
 
-  const handleDelete = (params: GridRowParams) => {
-    //delete the item
-    mutation.mutate(params.row.id);
+  const handleDelete = (id: number) => {
+    mutation.mutate(id);
   };
 
   const actionColumn: GridColDef = {
@@ -42,7 +40,7 @@ const DataTable = (props: Props) => {
           <Link to={`/${props.slug}/${params.row.id}`}>
             <img src="/view.svg" alt="" />
           </Link>
-          <div className="delete" onClick={() => handleDelete(params)}>
+          <div className="delete" onClick={() => handleDelete(params.row.id)}>
             <img src="/delete.svg" alt="" />
           </div>
         </div>
